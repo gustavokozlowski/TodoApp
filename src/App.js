@@ -75,62 +75,70 @@ function App() {
     return <h2>Carregando...</h2>;
   }
   return (
-    <div className="App">
-      <div className="todo-header">
-        <h1>TodoApp</h1>
-      </div>
-      <div className="form-todo">
-        <h2>Criar tarefa</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="title">O que você vai fazer?</label>
-            <input
-              id="title"
-              type="text"
-              name="title"
-              placeholder="Título da tarefa"
-              onChange={(e) => setTitle(e.target.value)}
-              value={title || ""}
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="time">Duração:</label>
-            <input
-            id="time"
-              type="number"
-              name="time"
-              placeholder="Tempo estimado(em horas)"
-              onChange={(e) => setTime(e.target.value)}
-              value={time || ""}
-              required
-            />
-          </div>
-          <button id="button" type="submit">
-            Adicionar 
-            <HiOutlinePlusSm id="button-icon" />
-            </button> 
-        </form>
-      </div>
-      <div className="list-todo">
-        <h2>Lista de tarefas</h2>
-        {todos.length === 0 && <div className="list-empty">  <p id="empty-text">Nenhuma tarefa pendente </p> <FcOk id="check"/>  </div> }
-        {todos.map((todo) => (
-          <div className="todo" key={todo.id}>
-            <h3 className={todo.done ? "todo-done" : ""}>{todo.title}</h3>
-            <p>Duração: {todo.time}</p>
-            <div className="actions">
-              <span onClick={() => handleEdit(todo)}>
-                {!todo.done ? (
-                  <BsBookmarkCheck id="undone" />
-                ) : (
-                  <BsBookmarkCheckFill id="done" />
-                )}
-              </span>
-              <BsTrash id="trash" onClick={() => handleDelete(todo.id)} />
+    <div className="containerApp">
+      <div className="App">
+        <div className="todo-header">
+          <h1>TodoApp</h1>
+        </div>
+        <div className="form-todo">
+          <h2>Criar tarefa</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-control">
+              <label htmlFor="title">O que você vai fazer?</label>
+              <input
+                id="title"
+                type="text"
+                name="title"
+                placeholder="Título da tarefa"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title || ""}
+                required
+              />
             </div>
-          </div>
-        ))}
+            <div className="form-control">
+              <label htmlFor="time">Duração:</label>
+              <input
+                id="time"
+                type="number"
+                name="time"
+                placeholder="Tempo estimado(em horas)"
+                onChange={(e) => setTime(e.target.value)}
+                value={time || ""}
+                required
+              />
+            </div>
+            <button id="button" type="submit">
+              Adicionar
+              <HiOutlinePlusSm id="button-icon" />
+            </button>
+          </form>
+        </div>
+        <div className="list-todo">
+          <h2>Lista de tarefas</h2>
+          {todos.length === 0 && (
+            <div className="list-empty">
+              {" "}
+              <p id="empty-text">Nenhuma tarefa pendente </p>{" "}
+              <FcOk id="check" />{" "}
+            </div>
+          )}
+          {todos.map((todo) => (
+            <div className="todo" key={todo.id}>
+              <h3 className={todo.done ? "todo-done" : ""}>{todo.title}</h3>
+              <p>Duração: {todo.time}</p>
+              <div className="actions">
+                <span onClick={() => handleEdit(todo)}>
+                  {!todo.done ? (
+                    <BsBookmarkCheck id="undone" />
+                  ) : (
+                    <BsBookmarkCheckFill id="done" />
+                  )}
+                </span>
+                <BsTrash id="trash" onClick={() => handleDelete(todo.id)} />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
